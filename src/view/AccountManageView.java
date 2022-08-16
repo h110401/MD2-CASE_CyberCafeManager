@@ -2,6 +2,7 @@ package view;
 
 import controller.AccountController;
 import model.Account;
+import model.Role;
 
 import java.util.List;
 import java.util.Scanner;
@@ -53,7 +54,7 @@ public class AccountManageView {
         String newUsername = sc.nextLine();
         System.out.println("Enter new password");
         String newPassword = sc.nextLine();
-        accountController.editAccount(new Account(id, newUsername, newPassword));
+        accountController.editAccount(new Account(id, newUsername, newPassword, Role.ADMIN));
     }
 
     private void formDeleteAccount() {
@@ -73,7 +74,7 @@ public class AccountManageView {
         System.out.println("Enter account password:");
         String password = sc.nextLine();
         int id = accountList.size() == 0 ? 1 : accountList.get(accountList.size() - 1).getId() + 1;
-        accountController.saveAccount(new Account(id, username, password));
+        accountController.saveAccount(new Account(id, username, password, Role.ADMIN));
     }
 
     private void formShowAccountList() {

@@ -5,19 +5,21 @@ import config.Config;
 import static data.Path.*;
 
 import model.Account;
+import model.Role;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AccountServiceIMPL implements IAccountService {
 
+    //    static List<Account> accountList = new ArrayList<>();
     static Config<List<Account>> config = new Config<>();
     static List<Account> accountList;
 
     static {
-//        accountList.add(new Account(1, "a", "a"));
-//        accountList.add(new Account(2, "b", "b"));
-//        accountList.add(new Account(3, "c", "c"));
+//        accountList.add(new Account(1, "a", "a", Role.ADMIN));
+//        accountList.add(new Account(2, "b", "b", Role.ADMIN));
+//        accountList.add(new Account(3, "c", "c", Role.ADMIN));
         accountList = config.read(PATH_ACCOUNT_LIST);
     }
 

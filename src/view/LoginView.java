@@ -1,12 +1,9 @@
 package view;
 
 
-import config.Config;
-
-import static data.Path.*;
-
 import controller.AccountController;
 import model.Account;
+import model.Role;
 
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +15,6 @@ public class LoginView {
 
     public void menu() {
         System.out.println("1. Login");
-//        System.out.println("2. Change Password");
         System.out.println("2. Forgot Password");
         System.out.println("3. Exit");
         try {
@@ -27,9 +23,6 @@ public class LoginView {
                 case 1:
                     this.login();
                     break;
-//                case 2:
-//                    this.changePassword();
-//                    break;
                 case 2:
                     this.forgotPassword();
                     break;
@@ -65,29 +58,6 @@ public class LoginView {
                 != null;
     }
 
-//    private void changePassword() {
-//        System.out.println("Change password");
-////        System.out.println("Enter old password");
-////        String oldPassword = sc.nextLine();
-////        if (oldPassword.equals(adminAccount.getPassword())) {
-////            System.out.println("Enter new password");
-////            String newPassword = sc.nextLine();
-////            System.out.println("Enter new password again");
-////            String newPasswordRepeat = sc.nextLine();
-////            if (newPassword.isEmpty()) {
-////                System.out.println("New password can not be empty");
-////            } else if (newPasswordRepeat.equals(newPassword)) {
-////                adminAccount.setPassword(newPassword);
-////                config.write(adminAccount, PATH_ACCOUNT);
-////                System.out.println("Changed password successfully");
-////            } else {
-////                System.out.println("Password does not match");
-////            }
-////        } else {
-////            System.out.println("Wrong password");
-////        }
-//    }
-
     private void forgotPassword() {
         System.out.println("Enter username");
         String username = sc.nextLine();
@@ -98,7 +68,7 @@ public class LoginView {
         }
         System.out.println("Enter new password");
         String newPassword = sc.nextLine();
-        accountController.editAccount(new Account(find.getId(), username, newPassword));
+        accountController.editAccount(new Account(find.getId(), username, newPassword, Role.ADMIN));
 
         System.out.println("Completed");
     }

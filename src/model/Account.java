@@ -3,14 +3,17 @@ package model;
 import java.io.Serializable;
 
 public class Account implements Serializable {
+
+    private Role role;
     private int id;
     private String username;
     private String password;
 
-    public Account(int id, String username, String password) {
+    public Account(int id, String username, String password, Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     public int getId() {
