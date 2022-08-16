@@ -12,4 +12,6 @@ public interface IGeneric<T> {
     void remove(int id);
 
     T findById(int id);
+
+    void saveData();
 }

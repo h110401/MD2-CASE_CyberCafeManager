@@ -19,7 +19,7 @@ public class RevenueController {
         revenueService.save(revenue);
     }
 
-    public int getTotalRevenue() {
+    public long getTotalRevenue() {
         return revenueService.getTotalRevenue();
     }
 

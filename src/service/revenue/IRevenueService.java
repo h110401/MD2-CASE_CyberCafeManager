@@ -6,7 +6,7 @@ import service.IGeneric;
 import java.time.LocalDate;
 
 public interface IRevenueService extends IGeneric<Revenue> {
-    int getTotalRevenue();
+    long getTotalRevenue();
 
     Revenue findByLocalDate(LocalDate localDate);
 }

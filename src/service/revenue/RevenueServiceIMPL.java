@@ -1,22 +1,27 @@
 package service.revenue;
 
 import config.Config;
+
+import static data.Path.*;
+
 import model.Revenue;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RevenueServiceIMPL implements IRevenueService {
 
-    Config<Revenue> config = new Config<>();
-    static List<Revenue> revenueList = new ArrayList<>();
+    static Config<List<Revenue>> config = new Config<>();
+    static Config<Long> longConfig = new Config<>();
+    static List<Revenue> revenueList;
 
-    static int totalRevenue;
+    static long totalRevenue;
 
     static {
-        revenueList.add(new Revenue(1, 100000, LocalDate.of(2001,1,1)));
-        revenueList.add(new Revenue(2, 200000, LocalDate.of(2001,1,2)));
+//        revenueList.add(new Revenue(1, 100000, LocalDate.of(2001, 1, 1)));
+//        revenueList.add(new Revenue(2, 200000, LocalDate.of(2001, 1, 2)));
+        revenueList = config.read(PATH_REVENUE_LIST);
+        totalRevenue = longConfig.read(PATH_TOTAL_REVENUE);
     }
 
     @Override
@@ -33,6 +38,8 @@ public class RevenueServiceIMPL implements IRevenueService {
             current.setRevenueOfDay(current.getRevenueOfDay() + e.getRevenueOfDay());
         }
         totalRevenue += e.getRevenueOfDay();
+        saveData();
+        longConfig.write(totalRevenue, PATH_TOTAL_REVENUE);
     }
 
     @Override
@@ -51,7 +58,12 @@ public class RevenueServiceIMPL implements IRevenueService {
     }
 
     @Override
-    public int getTotalRevenue() {
+    public void saveData() {
+        config.write(revenueList, PATH_REVENUE_LIST);
+    }
+
+    @Override
+    public long getTotalRevenue() {
         return totalRevenue;
     }
 }
